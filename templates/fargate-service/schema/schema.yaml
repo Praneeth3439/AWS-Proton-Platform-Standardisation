@@ -1,0 +1,24 @@
+schema:
+  format:
+    openapi: "3.0.0"
+
+  pipeline:
+    pipelineProvisioning: "CUSTOMER_MANAGED"
+
+  specs:
+    - name: service_input
+      description: Standardized Fargate service configuration
+      type: object
+
+      properties:
+        image:
+          type: string
+          description: Docker image stored in Amazon ECR
+
+        container_port:
+          type: number
+          description: Container port
+
+      required:
+        - image
+        - container_port

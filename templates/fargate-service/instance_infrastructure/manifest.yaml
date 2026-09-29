@@ -1,0 +1,4 @@
+infrastructure:
+  templates:
+    - file: infrastructure.yaml
+      engine: cloudformation

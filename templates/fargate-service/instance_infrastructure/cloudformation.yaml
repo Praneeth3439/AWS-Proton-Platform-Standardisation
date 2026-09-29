@@ -1,0 +1,28 @@
+AWSTemplateFormatVersion: '2010-09-09'
+
+Resources:
+
+  TaskDefinition:
+    Type: AWS::ECS::TaskDefinition
+    Properties:
+      Family: standardized-fargate-service
+      NetworkMode: awsvpc
+
+      RequiresCompatibilities:
+        - FARGATE
+
+      Cpu: '256'
+      Memory: '512'
+
+      ExecutionRoleArn: !Sub arn:aws:iam::${AWS::AccountId}:role/ecsTaskExecutionRole
+
+      ContainerDefinitions:
+        - Name: standardized-container
+
+          Image: "{{service_instance.inputs.image}}"
+
+          Essential: true
+
+          PortMappings:
+            - ContainerPort: "{{service_instance.inputs.container_port}}"
+              Protocol: tcp
